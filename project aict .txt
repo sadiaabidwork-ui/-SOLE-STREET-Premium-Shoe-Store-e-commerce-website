@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Shoe Store</title>
+
+<style>
+:root {
+    --dark: #111;
+    --light-gray: #f8f8f8;
+    --border: #eeeeee;
+    --accent: #ff6b00;
+}
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body { margin: 0; background: #fff; color: var(--dark); }
+
+header {
+    display: flex; 
+	justify-content: space-between; 
+	align-items: center;
+    padding: 20px 5%;
+	border-bottom: 1px solid var(border);
+    position: sticky;
+	top: 0;
+	background: white;
+}
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    height: 70px;   /* control logo size */
+    width: auto;
+}
+
+}
+/* ===== LAYOUT & BACKGROUNDS ===== */
+        
+
+
+        main { flex: 1; position: relative; min-height: 100vh; }
+
+        /* SECTION BACKGROUND IMAGES */
+        .page-section { 
+            display: none; 
+            padding: 40px; 
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+        }
+        .page-section.active { display: block; }
+
+        #home { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://cdn.prod.website-files.com/5ee0a01c741b15ab8ec28a14/65e1f0b0f215b0861c97d003_%3Fid%3D967-main.webp'); }
+        #men { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=2080'); }
+        #women { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=2080'); }
+        #kids { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1514989940723-e8e51635b782?q=80&w=2070'); }
+		#new { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://png.pngtree.com/thumb_back/fh260/background/20220929/pngtree-shoes-promotion-banner-background-image_1466238.jpg'); }
+        #cart { background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.shutterstock.com/image-photo/fashion-shot-beautiful-young-girl-260nw-1893840685.jpg'); }
+        #contact { background-image: url('https://logo-icons.com/cdn/shop/files/3037-logo-1739063170.347.svg?v=1739221551'); }
+
+        h1 { 
+		color: white; 
+		text-shadow: 2px 2px 10px rgba(0,0,0,0.5); 
+		font-size: 3rem; 
+		margin-bottom: 30px;
+		}
+
+        /* ===== PRODUCT CARDS (Glassmorphism) ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+nav button {
+    background: none;
+    border: none;
+    margin-left: 20px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+nav button:hover {
+    color: var(--accent);
+}
+
+.cart-count {
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* ===== HEADER FIX ===== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ===== WRAPPER FIX ===== */
+.wrapper {
+    display: flex;
+    margin-top: 70px; /* header height */
+    min-height: calc(100vh - 70px);
+}
+
+
+
+main { flex: 1; padding: 40px; background: var(--light-gray); }
+.page-section { display: none; }
+.page-section.active { display: block; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards side by side */
+    gap: 30px;
+}
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content:10px;
+	 background: white;
+    border: 1px solid var(--border);
+    padding: 15px;
+    text-align: center;
+}
+.card img {
+    width: 100%;
+    height: 180px;          /* shorter image height */
+    object-fit: contain;    /* show FULL image */
+    background: #fff;       /* fills empty space cleanly */
+    display: block;
+    margin-bottom: 15px;
+}
+
+
+.btn {
+    background: var(--dark); color: white;
+    padding: 12px; width: 100%;
+    border: none; cursor: pointer;
+}
+.btn:hover { background: #444; }
+
+.cart-item {
+    background: white;
+    padding: 15px;
+    border: 1px solid var(--border);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.contact {
+    background: white;
+    padding: 40px;
+    border-radius: 6px;
+}
+
+.contact-box p {
+    font-size: 16px;
+    margin: 12px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo" onclick="showPage('home')">
+    <img src="https://logo-icons.com/cdn/shop/files/3037-logo-1739063170.347.svg?v=1739221551" alt="Sole Street Logo">
+    <span>SOLE STREET</span>
+</div>
+
+    <nav>
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('men')">Men</button>
+        <button onclick="showPage('women')">Women</button>
+		 <button onclick="showPage('kids')">Kids </button>
+        <button onclick="showPage('new')">New Arrivals</button>
+		<button onclick="showPage('contact')">Contact</button>
+        <button onclick="showPage('cart')">
+            Cart <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </nav>
+</header>
+
+
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="page-section active">
+<h1>Home</h1>
+
+<div class="grid">
+
+    <div class="card">
+        <img src="https://i5.walmartimages.com/asr/f8e6d16f-44e2-488e-92bc-de74fdaae5ad.d1878f8c3da70167659b5aaa45a76e17.jpeg">
+        <h4>Urban Sneakers</h4>
+        <p>RS.2500</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',2500)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="https://m.media-amazon.com/images/I/71uZIN7uyAL._AC_UY1000_.jpg">
+        <h4>Black Loafers</h4>
+        <p>RS.2000</p>
+        <button class="btn" onclick="addToCart('Black Loafers',2000)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="https://www.tnvcollection.pk/cdn/shop/files/c5bdb9c0-9e5e-4e6c-ae86-d40d21a75d58.jpg?v=1740558718">
+        <h4>Casual Shoes</h4>
+        <p>RS.11999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',11999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://i5.walmartimages.com/seo/Men-s-Sneakers-Casual-Dress-Shoes-Slip-on-Lace-up-Business-Comfortable-Walking-Shoes-Skate-Shoes-Black-Size-11_30d3d87d-fc82-4d71-a093-5ec16c2990cf.895871fbf86624b221650ca865085e1d.jpeg">
+        <h4>JOGGERS</h4>
+        <p>RS.3000</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',3000)">Add to Cart</button>
+    </div>
+    <div class="card">
+        <img src="https://m.media-amazon.com/images/I/71MGSEIF9rL._AC_SL1000__.jpg">
+        <h4>Casual JOGGERS</h4>
+        <p>RS.3000</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',3000)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG5e5Bf0nr0GFGoZC6kYrFT5YzCQz7v1hK2w&s">
+        <h4>Casual BOOT </h4>
+        <p>RS.3000</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',3000)">Add to Cart</button>
+    </div>
+<div class="card">
+        <img src="https://static-01.daraz.pk/p/6cac55e5db86fc2ec10f9b777890cd5a.jpg">
+        <h4>Casual Shoes</h4>
+        <p>RS.4000</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',4000)">Add to Cart</button>
+    </div>
+<div class="card">
+        <img src="https://i5.walmartimages.com/seo/jjayotai-Shoes-for-Men-formal-Casual-Shoes-Business-Leather-Shoes-Pointed-Casual-Men-S-Shoes-Flash-Picks_fc486bf4-4e45-43b2-aa37-946f1c59e6f5.4608a76dcddee789630941971a37d1e1.jpeg">
+        <h4>Casual Shoes</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',3999)">Add to Cart</button>
+    </div>
+<div class="card">
+        <img src="https://www.thejacketmaker.pk/cdn/shop/products/01_Professor_Oxford_Midnight_Blue_Leather_Shoes_Front_Tilted-2-1674262010229_9c5d462f-3219-4f38-9eaf-a30186f5a0aa.webp?v=1756909990">
+        <h4>Casual Shoes</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://image.made-in-china.com/202f0j00KyHiGIWrbDkb/High-Quality-Brand-Ladies-Non-Slip-Wedge-Heels-Sandal-2022.webp">
+        <h4>Casual SOLE</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://i5.walmartimages.com/seo/Women-Shoes-Womens-Shoes-Summer-Casual-Fashion-Shoes-Casual-Shoes-Pointed-Toe-Stiletto-Sandals-Black-6-5_64ef3df3-f2e3-4409-9613-9ede87c977f3.eb354a23eec06637d0b85c4b2143a48d.jpeg">
+        <h4>Casual HEELS</h4>
+        <p>RS.5999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',5999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2023/2/EH/XC/ST/184488574/wd-5056-500x500.jpg">
+        <h4>Casual SOLE</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://www.ndure.com/cdn/shop/articles/Stunning_Summer_Collection_For_Women_By_Ndure_Shoes.jpg?v=1686742569">
+        <h4>FLAT</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',3999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAZBodZgSaMQEvUeCt_pZmPIMR_KcCXkp4OQ&s">
+        <h4>Casual Shoes</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://i5.walmartimages.com/seo/Women-Shoes-Ladies-Fashion-Open-Toe-Wedges-Platforms-High-Heels-Shoes-Sandals-Silver-8_92f7f1ab-ddf1-4d8f-85cd-198c8c53b66e.6af6f65a2d083aa2d77fceda69126653.jpeg">
+        <h4>Casual SOLE</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',3999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://cdn.shopify.com/s/files/1/2337/7003/files/4f52d284e0aa4cf1e257d9263252a54e_1_-_Copy-174889801831642_7abd5f7b-cd45-4cc1-8358-ae844cb18691.jpg?v=1749015058">
+        <h4>Casual SOLE</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',3999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://efashion.com.pk/cdn/shop/files/download_1_ef4c0b2b-ff82-49f5-a150-e2b261783762.png?v=1761306769">
+        <h4>COAT SHOES</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://img.drz.lazcdn.com/static/pk/p/d809fe0dc34b08af8714abca533d1470.jpg_720x720q80.jpg">
+        <h4>HEELS</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://heelsshoes.pk/cdn/shop/files/IMG_3579_17e87e75-42a6-4de0-b268-87454209ed17.jpg?v=1757061144&width=500">
+        <h4>Casual FLAT</h4>
+        <p>RS.2999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',2999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-F8HYIKQeD5_oL-uBDmU01H1nO3VOyWpBOA&s">
+        <h4>Casual HEELS</h4>
+        <p>RS.9999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',9999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://graceup.pk/cdn/shop/files/A97_1_dfd59814-b8e1-4d7f-a336-8c422f112c4a.png?v=1763208245">
+        <h4>HIGH HEELS</h4>
+        <p>RS.8999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',8999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://m.media-amazon.com/images/I/71RqCI7xdvL._AC_UF1000,1000_QL80_.jpg">
+        <h4>FORMAL HEELS</h4>
+        <p>RS.6999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',6999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://dressfair.pk/image/cache/catalog/product-117/new-korean-style-stiletto-roman-high-heels-sandals-pink-RgQVby5AIS-550x550.jpeg">
+        <h4>STYLISH HEELS</h4>
+        <p>RS.8999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',8999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://image.made-in-china.com/202f0j00dsIYeqzRgEoD/New-Autumn-Style-Pointed-Toe-Single-Lady-Shoes-Flat-Shallow-Mouth-Korean-Version-Soft-Sole-Comfort-Shoes-Fashion-Women-Shoes-Flat-Shoe.webp">
+        <h4>KIDDO Sneakers</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Casual Shoes',3999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://servis.pk/cdn/shop/files/B-BO-0500154WHITE.jpg?v=1756669134">
+        <h4>Urban Sneakers</h4>
+        <p>RS.2999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',2999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://footwearmenders.com/cdn/shop/files/Generated_Image_May_27_2025_-_3_15PM-Photoroom-Photoroom.jpg?v=1759684227&width=3840">
+        <h4>LIGHTENING Sneakers</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',4999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://i5.walmartimages.com/seo/YUNICUS-Toddler-Light-Up-Shoes-Boys-Kids-Shoes-Sport-Sneaker-LED-for-Toddles-Boys-Girls-Little-Kid-13-5M-Blue-Orange_92b62af0-dc3d-4229-8208-6acf3dcec91e.c3eeb25c44ef2699e9d25be9083f1bf5.jpeg">
+        <h4>Urban Sneakers</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',3999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://footwearmenders.com/cdn/shop/files/Kidsshoes_17.jpg?v=1725275286">
+        <h4>Urban FLAT</h4>
+        <p>RS.2999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',2999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://m.media-amazon.com/images/I/71k4hzUfJcL._AC_SL1500_.jpg">
+        <h4>Urban SANDALS</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',3999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://i5.walmartimages.com/asr/4fa334ad-9a7e-459e-b9a8-b0e5508205e6.b371064f1ebf7003624a4b778f012370.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF">
+        <h4>HOUSEWEAR</h4>
+        <p>RS.1999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',1999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://images-na.ssl-images-amazon.com/images/I/41jTz-yIYuL._SL500_._AC_SL500_.jpg">
+        <h4>Urban SOLE</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',3999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://www.borjan.com.pk/cdn/shop/files/B34000070-WHITE.png?v=1757097745">
+        <h4>Urban Sneakers</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',3999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://www.shoeaffair.com.pk/cdn/shop/files/DSC_7517.jpg?v=1738320344&width=500">
+        <h4>Urban BOOT</h4>
+        <p>RS.2999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',2999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://image.made-in-china.com/2f0j00NJpQFsfBnTkr/Girl-Children-Comfortable-Fancy-Dress-Shoes-Kids-Shoes.webp">
+        <h4>Urban BOOT</h4>
+        <p>RS.2999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',2999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzUSUyJyBy9l4E5rVuNP7Pui8RahAeK_520Q&s">
+        <h4>Urban BOOT</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',3999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://ae01.alicdn.com/kf/Sb8c6efb03619466aafee7c0df4a14d9aw/Oxford-School-Shoes-Kids-Patent-Leather-Shoes-Girls-Boys-Toddler-Shoes-Children-Fashion-Dress-Platform-Party.jpg">
+        <h4>Urban WEAR</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',3999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://img.lazcdn.com/g/ff/kf/Sd92cc0645f0a4f6d8b87fe3a0b095064l.jpg_720x720q80.jpg">
+        <h4>Urban WEAR</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',4999)">Add to Cart</button>
+    </div>
+		<div class="card">
+        <img src="https://m.media-amazon.com/images/I/71pD8DemRnL.jpg">
+        <h4>Urban Sneakers</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',4999)">Add to Cart</button>
+    </div>
+		<div class="card">
+        <img src="https://img4.dhresource.com/webp/m/0x0/f3/albu/ry/n/06/59e6be7b-80b9-4c4c-a3d7-56ebb8956163.jpg">
+        <h4>Urban BOOT</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('Urban Sneakers',3999)">Add to Cart</button>
+    </div>
+</div>
+</section>
+
+<!-- MEN -->
+<section id="men" class="page-section">
+<h1>Men's Shoes</h1>
+<div class="grid">
+    <div class="card">
+        <img src="https://sc04.alicdn.com/kf/H05e001bf298b49ef915bb17a3c6362af5.jpg">
+        <h4>Leather Oxfords</h4>
+        <p>RS.3880</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',3880)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://img4.dhresource.com/webp/m/0x0/f3/albu/jc/o/30/2db9a2ed-ca86-4fe2-aaee-c2649efa946e.jpg">
+        <h4>Leather shoes</h4>
+        <p>RS.6880</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',6880)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://www.chic.ae/_next/image/?url=https%3A%2F%2Fcdn.chic.ae%2Fuploads%2Fblogs%2F1746570417983&w=1200&q=75">
+        <h4>Stylish Oxfords</h4>
+        <p>RS.RS.5990</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',5990)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://cdn06.nnnow.com/web-images/medium/styles/YP0Z2UI1JMD/1763534201375/1.jpg">
+        <h4>Leather boot</h4>
+        <p>RS.5999</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',5999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTemQZv3iHa5a2cSrrD8tHO5-PT4RTmCTbP2Q&s">
+        <h4>Sneakers</h4>
+        <p>RS.5690</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',5690)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://hitz.co.in/cdn/shop/files/6754-BLACK.jpg?v=1755620151">
+        <h4>Sandal</h4>
+        <p>RS.3880</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',3880)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://artisansofficial.com/cdn/shop/files/ezgif.com-webp-to-jpg-converter-2025-03-08T144427.904.jpg?v=1741986532">
+        <h4>Leather Sandal</h4>
+        <p>RS.4550</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',4550)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://image.made-in-china.com/2f0j00iTvboUmknwuz/Summer-Flip-Flops-Men-Slippers-Fashion-Indoor-Non-Slip-Home-Shoes-Male-Outdoor-Beach-Casual-Platform-Sandals-Sandalias.webp">
+        <h4>Casual wear</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',4999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ03YkjIbsdGyDCEpNcaszf9cGOtqGwXO_gaQ&s">
+        <h4>open shoes</h4>
+        <p>RS.3990</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',3990)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://www.chic.ae/_next/image/?url=https%3A%2F%2Fcdn.chic.ae%2Fuploads%2FBuy%20Chic%20Men%20Flat%20Sandals.jpg&w=3840&q=75">
+        <h4>Casual FLAT</h4>
+        <p>RS.7885</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',7885)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfG84xCDxa-TaBzPoHlP0euWei6FynxufpZA&s00">
+        <h4>Stylish sandal</h4>
+        <p>RS.4770</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',4770)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYzV5CWUVhCm1zlVbh4lYKn3nSHcv18pltoA&s">
+        <h4>HOUSE WEAR</h4>
+        <p>RS.3880</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',3880)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://uomoattire.com/cdn/shop/files/shoes-forgroom_1445x.jpg?v=1735732580s">
+        <h4>Wedding boot</h4>
+        <p>RS.9999</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',9999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://uomoattire.com/cdn/shop/products/blackshoeswithemb2_11zon_1445x.jpg?v=1673878433">
+        <h4>Embroidered boot</h4>
+        <p>RS.8999</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',8999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://i.pinimg.com/originals/58/19/16/5819167fa65c181f92d5bb1645e90cc8.jpg">
+        <h4>Embroidered WEAR</h4>
+        <p>RS.9852</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',9852)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://img.joomcdn.net/b3ef72583ea9d0db3a18e7c3920744ed8dda6bb3_original.jpeg">
+        <h4>Leather Oxfords</h4>
+        <p>RS.7899</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',7899)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://cdn.shopify.com/s/files/1/0706/3253/8159/files/gulahmed_ideas_black_leather_peshawari_chappal_for_men.png?v=1758539242s">
+        <h4>Pishawri chapal</h4>
+        <p>RS.7999</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',7999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://s.alicdn.com/@sc04/kf/A75ae19f87ee245d3aa2e6652e30c8678m/New-Fashion-Best-Quality-Solid-Color-Tribal-Kuchi-Men-Peshawari-Chappal-Charsadda-Kaptaan-Chappal-Kheri-Balochi-Punjabi-Jutti.jpg">
+        <h4>Pishawri chapal</h4>
+        <p>RS.8522</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',8522)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://static-01.daraz.pk/p/fda44c89d3e8e93f90a0c68cfd4bc664.jpg">
+        <h4>Pishawri chapal</h4>
+        <p>RS.5622</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',5622)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://d30fs77zq6vq2v.cloudfront.net/product/515x772/26022025/023-mustard-side-high-2_1730194024-53868007409.jpg">
+        <h4>BOOT</h4>
+        <p>RS.6666</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',6666)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://www.desiblitz.com/wp-content/uploads/2020/05/Sneakers-to-Wear-with-Salwar-Kameez-Lou.jpg">
+        <h4>Leather Oxfords</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',4999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHfD60iGAwfFlrPLrFxKqm1yhBYb6bS-PzyQ&s">
+        <h4>JOGGERS</h4>
+        <p>RS.5888</p>
+        <button class="btn" onclick="addToCart('Leather Oxfords',5888)">Add to Cart</button>
+    </div>
+</div>
+</section>
+
+<!-- WOMEN -->
+<section id="women" class="page-section">
+<h1>Women's Shoes</h1>
+<div class="grid">
+    <div class="card">
+        <img src="https://i.etsystatic.com/37017197/r/il/c5bd83/5402696497/il_570xN.5402696497_nnmh.jpg">
+        <h4>Casual Heels</h4>
+        <p>RS.12203</p>
+        <button class="btn" onclick="addToCart('High Heels',12203)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://img.kwcdn.com/product/open/1790f3b28cbe4eb79fd8e62dbeb94a33-goods.jpeg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp">
+        <h4>BOOT</h4>
+        <p>RS.5899</p>
+        <button class="btn" onclick="addToCart('High Heels',5899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://img.lazcdn.com/g/p/76e093d57d9823e5cb7b999f7957f315.png_720x720q80.png">
+        <h4>COAT Shoe</h4>
+        <p>RS.5999</p>
+        <button class="btn" onclick="addToCart('High Heels',5999)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa1EPr_isxvIgxX-cYbaQW7NUGA5ORkrM1ZQ&s">
+        <h4>BOOT</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('High Heels',4999)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://img.joomcdn.net/c0983c04c241399e210eb8a01018af90a1b653dd_original.jpeg">
+        <h4>CASUAL WEAR</h4>
+        <p>RS.5899</p>
+        <button class="btn" onclick="addToCart('High Heels',5899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzXIB1oRgnes6ohYBEXa7qlxltVQni0r-CvQ&s">
+        <h4>Sandal</h4>
+        <p>RS.3999</p>
+        <button class="btn" onclick="addToCart('High Heels',3999)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://thesassystore.shop/cdn/shop/files/1I0A9779_170073ca-dfe4-44de-81a2-bfdde6ef14df_900x.jpg?v=1741853942">
+        <h4>FLAT</h4>
+        <p>RS.2999</p>
+        <button class="btn" onclick="addToCart('High Heels',2999)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://i.pinimg.com/236x/a5/1c/57/a51c57b25f90cd635dedfa0aa1fbd70c.jpg">
+        <h4>KHUSA</h4>
+        <p>RS.5899</p>
+        <button class="btn" onclick="addToCart('High Heels',5899)">Add to Cart</button>
+    </div> 
+	<div class="card">
+        <img src="https://unze.com.pk/cdn/shop/products/L35949a.jpg?v=1741190861">
+        <h4>FLAT SHOES</h4>
+        <p>RS.5899</p>
+        <button class="btn" onclick="addToCart('High Heels',5899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://www.hushpuppies.com.pk/cdn/shop/files/IMG_6056_0ff8f72e-9a4e-45eb-a0a8-94f4f6f3674a.jpg?v=1757509553&width=1200">
+        <h4>OFFICE Heels</h4>
+        <p>RS.6999</p>
+        <button class="btn" onclick="addToCart('High Heels',6999)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://us.boden.com/cdn/shop/files/25wwin_a2077_rus_m01_v1.jpg?v=1764088556&width=720">
+        <h4>VALVITE Heels</h4>
+        <p>RS.5899</p>
+        <button class="btn" onclick="addToCart('High Heels',5899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://m.media-amazon.com/images/I/51imwX0cTWL._AC_UF1000,1000_QL80_.jpg">
+        <h4>STYLISH Heels</h4>
+        <p>RS.4889</p>
+        <button class="btn" onclick="addToCart('High Heels',4889)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://unze.com.pk/cdn/shop/files/L38492.jpg?v=1687286032">
+        <h4>URBAN Heels</h4>
+        <p>RS.9899</p>
+        <button class="btn" onclick="addToCart('High Heels',9899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://m.media-amazon.com/images/I/810AegFHV-L._AC_UF894,1000_QL80_.jpg">
+        <h4>Wedding Heels</h4>
+        <p>RS.10899</p>
+        <button class="btn" onclick="addToCart('High Heels',10899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://i.pinimg.com/736x/1b/29/c1/1b29c15b6eb19fa50f49fe13e01015fc.jpg">
+        <h4>PINK Heels</h4>
+        <p>RS.14000</p>
+        <button class="btn" onclick="addToCart('High Heels',14000)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://images-na.ssl-images-amazon.com/images/I/412fgnFzZ+L._SL500_._AC_SL500_.jpg">
+        <h4>BOOT Heels</h4>
+        <p>RS.8999</p>
+        <button class="btn" onclick="addToCart('High Heels',8999)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://i.ytimg.com/vi/MuFT9XPPQ94/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCJjgsMcCvPeDCsyf1XAHwRGBwjYA">
+        <h4> Heels</h4>
+        <p>RS.12999</p>
+        <button class="btn" onclick="addToCart('High Heels',12999)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://s.alicdn.com/@sc04/kf/H64a14751de9a4e3a9fc13d830716ab4a3/French-Style-Temperament-Socialite-Red-Luxury-Wedding-Shoes-Rhinestone-Baotou-Pointed-Thin-Heel-High-Heel-Sandals-Female.jpg">
+        <h4>FABULOUS Heels</h4>
+        <p>RS.7899</p>
+        <button class="btn" onclick="addToCart('High Heels',7899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://walkeaze.com/cdn/shop/files/women-formal-heel-75294s-walkeaze-7289776_1024x.png?v=1766014146">
+        <h4>SIMPLE Heels</h4>
+        <p>RS.8899</p>
+        <button class="btn" onclick="addToCart('High Heels',8899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://stylo.pk/cdn/shop/collections/800x800-Wedding.jpg?v=1759384606">
+        <h4>FANCY Heels</h4>
+        <p>RS.8899</p>
+        <button class="btn" onclick="addToCart('High Heels',8899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://img.joomcdn.net/3a298dd02047568e3042c8e5a1f2744e4d6c888f_original.jpeg">
+        <h4>Wedding Heels</h4>
+        <p>RS.9899</p>
+        <button class="btn" onclick="addToCart('High Heels',9899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://images.bloomingdalesassets.com/is/image/BLM/products/6/optimized/14251726_fpx.tif?$2014_BROWSE_FASHION$&qlt=80,0&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=jpeg&wid=342&hei=428">
+        <h4>High Heels</h4>
+        <p>RS.9999</p>
+        <button class="btn" onclick="addToCart('High Heels',9999)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQsjJMJvHOTMndmUWDdN37hfngH1c8WQhTsg&s">
+        <h4>Embroidered KHUSA</h4>
+        <p>RS.15899</p>
+        <button class="btn" onclick="addToCart('High Heels',15899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://images.laceandfavour.com/_cache/_blog/900x900/head-over-heels-harriet-wilde-shoes.jpg">
+        <h4>WHITE Heels</h4>
+        <p>RS.8899</p>
+        <button class="btn" onclick="addToCart('High Heels',8899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://image.made-in-china.com/43f34j00INblnurWEsUv/2026-New-Fashionable-Bridal-High-Heeled-Pointed-Toe-Stilettos-with-White-Crystal-White-High-Heels-and-Beautiful-Wedding-Shoes.webp">
+        <h4>GLASS Heels</h4>
+        <p>RS.9899</p>
+        <button class="btn" onclick="addToCart('High Heels',9899)">Add to Cart</button>
+    </div>
+	 <div class="card">
+        <img src="https://insignia.com.pk/cdn/shop/files/IF5059Brown.jpg?v=1763565495&width=533">
+        <h4>BROWN Heels</h4>
+        <p>RS.13899</p>
+        <button class="btn" onclick="addToCart('High Heels',13899)">Add to Cart</button>
+    </div>
+</div>
+</section>
+<!-- KIDS (NEW – ICON ADDED ONLY) -->
+<section id="kids" class="page-section">
+<h1>Kids Shoes </h1>
+<div class="grid">
+    <div class="card">
+        <img src="https://babyplanet.pk/cdn/shop/files/B187001077711605_c162634e-88fc-4a8f-bad2-04804f5db221.jpg?v=1725109233">
+        <h4>Kids Sneakers</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://m.media-amazon.com/images/I/51sgO7SPUXL.jpg">
+        <h4>Kids JOGGERS</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://aiksow.pk/wp-content/uploads/2023/10/Baasploa-Children-Sport-Shoes-Mesh-Breathable-Casual-Sneakers-For-Boys-Girl-Lightweight-Running-Shoes-3.jpg">
+        <h4>Kido Sneakers</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://aiksow.pk/wp-content/uploads/2023/10/Baasploa-Children-Sport-Shoes-Mesh-Breathable-Casual-Sneakers-For-Boys-Girl-Lightweight-Running-Shoes-3.jpg">
+        <h4>Kids JOGGERS</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://di2ponv0v5otw.cloudfront.net/posts/2024/10/21/6716d01fb1ef58882a889fd7/m_6716d05a6af5755a648303d9.jpg">
+        <h4>Kids BOOT</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://m.media-amazon.com/images/I/71gQxGuV8aL._AC_SL1500_.jpg">
+        <h4>Kids BOOT</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://bachaaparty.com/cdn/shop/files/DSC_7915_1024x1024_515d6e6a-77c8-44cf-9bc4-67a0c5b7ff99.webp?v=1728025069&width=1080">
+        <h4>Kids FLAT</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://img.lazcdn.com/g/p/d646c189c892cc6ff64eeb5bcaf784ce.png_960x960q80.png_.webp0">
+        <h4>SOFT SHOES</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs3aOhPBmBwtHlXT8Hxs65Eu-Kx7r4XiDSuQ&s">
+        <h4>FOOT WEAR</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://dazzlebysarah.com/cdn/shop/files/ZAH07362-copy_1080x.jpg?v=1757570340">
+        <h4>Kids STYLE</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsvNjEN5yAGol40EWl6d_aWsB_eK-jvZWj2w&s">
+        <h4>Kids SHOES</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQporzrmOKjhIQTOm5VkYfHjKI5QDFll3hh9w&s">
+        <h4>CASUAL WEAR</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://servis.pk/cdn/shop/products/153_e0af5f30-fcc1-4ae4-a7d4-ee18a7cb662a.jpg?v=1756673987&width=533">
+        <h4>Kids FLAT</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvsNOxMjYnT2zm4PbaGKVI8Dc-8qkaO1Jc9A&s">
+        <h4>HOUSE WEAR</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div><div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfrxZt8CIOj94TiaAKD2PZBHGcQO-5foEzRA&s">
+        <h4>CASUAL WEAR</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://www.alnasser.pk/cdn/shop/files/S24-FS-SB533-BROWN_3_Copy_400x.jpg?v=1710575160">
+        <h4>Kids Sandal</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://www.borjan.com.pk/cdn/shop/files/2_7bc9e9f9-ef14-4412-9a36-7ac84f15771d.png?v=1757097570">
+        <h4>Kids Pishawri chapal</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemBH5Eg5WdSgVbS1lIzDMaY2D2do6MIVTmA&s">
+        <h4>Kids wear</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://librafashionzone.com/wp-content/uploads/2023/06/aeff0761-218f-4d69-9c84-b69ed9110fb0.jpg">
+        <h4>CASUAL SHOES</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://loveforleather.in/cdn/shop/files/048-IMG_6357.jpg?v=1693906782&width=1946">
+        <h4>Kids FLAT</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMVbJR-oXP3lvVMyPzN9f0nf8_ISmqVvWdGA&s">
+        <h4>KIDDO chapal</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://www.ndure.com/cdn/shop/files/1_29030fd4-8275-4bc3-8203-1420241ed7cb.jpg?v=1713873329">
+        <h4>Kids Kheri</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://stylo.pk/cdn/shop/files/KD474071_2_9d0cb820-1471-4bc1-a19a-dbba6799ebb3.jpg?v=1756925327&width=1080">
+        <h4>Kiddo Kheri</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+	<div class="card">
+        <img src="https://stylo.pk/cdn/shop/files/KD490248_2_600x.jpg?v=1756922414">
+        <h4>Kids Sandal</h4>
+        <p>RS.4999</p>
+        <button class="btn" onclick="addToCart('Kids Sneakers',4999)">Add to Cart</button>
+    </div>
+</div>
+</section>
+<!-- NEW -->
+<section id="new" class="page-section">
+<h1>New Arrivals</h1>
+<div class="grid">
+    <div class="card">
+        <img src="https://image.made-in-china.com/202f0j00yRGoTHgcqBpu/2023-New-Arrival-Navy-Blue-Canvas-Shoes-with-Leather-Trim-for-Couples.webp">
+        <h4>Air Street Max</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRwsQB1qa17iIs5zbV_gXtAiIkZ2FKbG8Tw&s">
+        <h4>Fancy heels</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://shopecs.com/cdn/shop/files/DSC_4253_1813cf7a-cc73-4b02-b42c-698ba18db17e.jpg?v=1757306884&width=533">
+        <h4>Air Street boot</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+        <img src="https://valenciapakistan.com/cdn/shop/files/IMG-2291.jpg?v=1729275708&width=1946">
+        <h4>CASUAL heels</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+    <div class="card">
+        <img src="https://valenciapakistan.com/cdn/shop/products/image_ea364a67-932d-4dbd-8c18-38a76787adc0.jpg?v=1670436382&width=1946">
+        <h4>Stylish heels</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://www.metroshoes.com.pk/cdn/shop/files/390x457_Metro_Mobile_5_copy.jpg?v=1752477136&width=750">
+        <h4> Street Max</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://image.made-in-china.com/202f0j00MkIgZmfWnHbL/Sandal-Women-2021-Newest-Arrival-Fashion-Slides-Footwear-Summer-Hot-Sale-Sandal.webp">
+        <h4> Sole Sandal </h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-FwRRYRRL6C7Ss5D38qmXjby8NpMc_iH3Hg&s">
+        <h4> Street Sandal</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://www.tresmode.com/cdn/shop/collections/women-s-new-arrivals-shoes-tresmode_bf2c22ba-1dbd-4b28-8e37-e31f76890560.jpg?v=1748330624">
+        <h4>Air Street Max</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://image.made-in-china.com/202f0j00BZzUYjFnCtkG/New-Arrival-Sexy-High-Heels-Shallow-Mouth-Color-Matching-Women-Shoes-Lady-Shoes.webp">
+        <h4>Fancy HEELS</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkazabY8VSDeKVdNBJ2kTZ4vWrF27-tQZHWw&s">
+        <h4>Wedding heels</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://i5.walmartimages.com/asr/24e698c4-180f-490c-8b14-120b19966a4f.02dac1906f1133c50d13c485fb74171a.jpeg">
+        <h4>Heels Max</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://img4.dhresource.com/webp/m/f3/albu/jc/g/03/425353b3-964e-4e90-aefa-77e00f452106.jpg">
+        <h4>CASUAL heels</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://cdn.media.amplience.net/i/clarks/W_Kepley%20Cora%20Product?fmt=auto&w=485">
+        <h4>Boot HEEL</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-cnMVreH7YzOiPjnJ8oRhHU5vk6oG3nYBXA&s">
+        <h4>CASUAL HEEL</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://hockshoes.com/cdn/shop/files/Untitled_design_173.webp?v=1758208607&width=533">
+        <h4> Street HEEL</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://valenciapakistan.com/cdn/shop/files/4D2B5D4F-F4D0-4BAD-AAFA-661E943A4159.jpg?v=1764103663&width=533">
+        <h4>NET SHOES</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhxSneOYGTB0a9qkNKhFbL-OGv9LQLU97Gmw&s">
+        <h4>BOOT NET</h4>
+        <p>RS.14995</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYjWHUqWlmsmS7j-gUmbXjVFiXwVz9Y7hM7w&s">
+        <h4>Boot Max</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4McWUR4YQHjIuO4Vyh2ZTDySaQ491FeVY0A&s">
+        <h4>COAT SHOES</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	
+    <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK-eRiWzcARtZnc0rrSOwI17ZCHe-hhw66Ng&s">
+        <h4>BROWN SHOES</h4>
+        <p>RS.14999</p>
+        <button class="btn" onclick="addToCart('Air Street Max',14999)">Add to Cart</button>
+    </div>
+	</section>
+<section id="contact" class="page-section contact">
+    <h1>Contact Us</h1>
+
+    <div class="contact-box">
+        <p><strong>Store Name:</strong> SOLE STREET</p>
+        <p><strong>Email:</strong> solestreet@gmail.com</p>
+        <p><strong>Phone:</strong> +92 300 1234567</p>
+        <p><strong>Phone:</strong> +92 313 3456891 </p
+        <p><strong>Address:</strong> Multan, Pakistan</p>
+    </div>
+</section>
+
+
+
+
+<!-- CART -->
+<section id="cart" class="page-section">
+<h1>Your Cart</h1>
+<div id="cartItems"></div>
+<h2 id="totalPrice">Total: Rs.0</h2>
+</section>
+
+</main>
+</div>
+
+<script>
+let cart = [];
+
+function showPage(pageId) {
+    document.querySelectorAll('.page-section')
+        .forEach(s => s.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+}
+
+function addToCart(name, price) {
+    cart.push({name, price});
+    updateCart();
+    alert(name + " added to cart!");
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+function updateCart() {
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const totalPrice = document.getElementById('totalPrice');
+
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price;
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name} - ${item.price}</span>
+                <button onclick="removeFromCart(${index})">❌</button>
+            </div>
+        `;
+    });
+
+    cartCount.textContent = cart.length;
+    totalPrice.textContent = "Total: Rs." + total;
+}
+</script>
+
+</body>
+</html>
